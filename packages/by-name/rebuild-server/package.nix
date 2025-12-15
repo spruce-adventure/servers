@@ -23,7 +23,7 @@ writeShellApplication {
 
     nixos-rebuild "$command" \
       --flake . \
-      --use-remote-sudo \
+      --sudo \
       --use-substitutes \
       --target-host "github-actions@$address" \
       --build-host builder@liferooter.dev \
