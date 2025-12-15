@@ -38,6 +38,9 @@
         "pine"
         "sequoia"
       ];
+      packages = eachSystem (
+        { pkgs, ... }: import ./packages/top-level/all-packages.nix { inherit pkgs inputs self; }
+      );
       devShell = eachSystem (
         { pkgs, ... }:
         pkgs.mkShellNoCC {

@@ -24,8 +24,5 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      - name: Install `nixos-rebuild`
-        run: nix-env -iA nixos-rebuild -f '<nixpkgs>'
-
       - name: Deploy configuration
-        run: .github/rebuild-server ${{ matrix.host }} $(cat modules/by-name/constants/${{ matrix.host }}.txt)
+        run: nix run .#${{ matrix.host }}
