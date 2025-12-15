@@ -9,7 +9,7 @@ writeShellApplication {
   ];
   text = ''
     name=$1
-    address="$(cat "modules/by-name/constants/$name")"
+    address="$(cat "modules/by-name/constants/$name.txt")"
 
     if git diff-tree --no-commit-id --name-only -r HEAD | grep -q '^flake\.lock$'; then
       flake_lock_changed=true
