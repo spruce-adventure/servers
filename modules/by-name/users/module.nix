@@ -27,8 +27,7 @@
       isNormalUser = true;
       extraGroups = [ "wheel" ];
       openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE0n6k734Ucam9uo6GcZAMVuHYwVQvdqSpo2v9kl1kZ4 ci@github
-"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIONinDFkfwNXOVh9x6kq4NBYFPWhLOO35fY0KvzlFATp actions@github.com"
       ];
     };
   };
