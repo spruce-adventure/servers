@@ -8,6 +8,8 @@ writeShellApplication {
     nixos-rebuild
   ];
   text = ''
+    set -x
+
     name=$1
     address="$(cat "modules/by-name/constants/$name.txt")"
 
