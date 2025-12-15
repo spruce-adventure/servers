@@ -25,4 +25,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy configuration
-        run: nix run .#${{ matrix.host }}
+        run: nix run .#rebuild-server -- ${{ matrix.host }}
