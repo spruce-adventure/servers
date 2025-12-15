@@ -24,5 +24,8 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      - name: Deploy configuration on sequoia
+      - name: Install `nixos-rebuild`
+        run: nix-env -iA nixpkgs.nixos-rebuild
+
+      - name: Deploy configuration
         run: .github/rebuild-server ${{ matrix.host }} $(cat modules/by-name/constants/${{ matrix.host }}.txt)
