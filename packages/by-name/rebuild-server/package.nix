@@ -26,8 +26,7 @@ writeShellApplication {
       --sudo \
       --use-substitutes \
       --target-host "github-actions@$address" \
-      --build-host builder@liferooter.dev \
-      --log-format bar-with-logs
+      --build-host builder@liferooter.dev
 
     if [ "$flake_lock_changed" = true ]; then
       echo "Rebooting $name..."
