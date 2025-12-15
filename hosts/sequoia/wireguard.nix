@@ -89,12 +89,14 @@ in
       postUp = ''
         ${iptables} -A FORWARD -i %i -j ACCEPT
         ${iptables} -A FORWARD -o %i -j ACCEPT
+        ${iptables} -t mangle -A FORWARD -o %i -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmt
         ${iptables} -t nat -A POSTROUTING -o ens3 -j MASQUERADE
         ${getExe addPeersScript}
       '';
       postDown = ''
         ${iptables} -D FORWARD -i %i -j ACCEPT
         ${iptables} -D FORWARD -o %i -j ACCEPT
+        ${iptables} -t mangle -D FORWARD -o %i -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmt
         ${iptables} -t nat -D POSTROUTING -o ens3 -j MASQUERADE
       '';
     };
