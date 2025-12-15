@@ -16,6 +16,9 @@ writeShellApplication {
     nix-output-monitor
   ];
   text = ''
+    name=$1
+    address=$2
+
     if git diff-tree --no-commit-id --name-only -r HEAD | grep -q '^flake\.lock$'; then
       flake_lock_changed=true
       command="boot"
@@ -27,27 +30,16 @@ writeShellApplication {
     fi
 
     nixos-rebuild "$command" \
-      --flake ${self} \
+      --flake . \
       --use-remote-sudo \
       --use-substitutes \
-      --target-host github-actions@${sequoiaAddr} \
+      --target-host "github-actions@$address" \
+      --build-host builder@liferooter.dev \
       --log-format bar-with-logs
 
     if [ "$flake_lock_changed" = true ]; then
-      echo "Rebooting sequoia..."
-      ssh github-actions@${sequoiaAddr} sudo systemctl reboot
-    fi
-
-    nixos-rebuild "$command" \
-      --flake ${self} \
-      --use-remote-sudo \
-      --use-substitutes \
-      --target-host github-actions@${pineAddr} \
-      --log-format bar-with-logs
-
-    if [ "$flake_lock_changed" = true ]; then
-      echo "Rebooting pine..."
-      ssh github-actions@${pineAddr} sudo systemctl reboot
+      echo "Rebooting $name..."
+      ssh "github-actions@$address" sudo systemctl reboot
     fi
   '';
 }
