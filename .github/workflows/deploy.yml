@@ -3,7 +3,11 @@ name: deploy
 on: push
 jobs:
   deploy:
-    name: Deploy
+    strategy:
+      matrix:
+        host: [proxy, endpoint]
+
+    name: Deploy ${{ matrix.host }} host
     runs-on: ubuntu-latest
 
     steps:
@@ -21,8 +25,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy configuration on sequoia
-        run: .github/rebuild-server sequoia $(cat modules/by-name/constants/endpoint.txt)
-
-      - name: Deploy configuration on pine
-        run: .github/rebuild-server pine $(cat modules/by-name/constants/proxy.txt)
-
+        run: .github/rebuild-server ${{ matrix.host }} $(cat modules/by-name/constants/${{ matrix.host }}.txt)
