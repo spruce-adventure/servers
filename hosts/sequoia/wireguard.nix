@@ -49,6 +49,9 @@ in
 {
   networking.nat.enable = true;
 
+  networking.firewall.allowedUDPPorts = [ wgPort ];
+  networking.firewall.allowedTCPPorts = [ wgPort ];
+
   sops.secrets.wireguardKey = {
     sopsFile = ./wireguard-server.yml;
 
