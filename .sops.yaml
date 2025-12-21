@@ -6,6 +6,7 @@ keys:
   - &admin_khromotov age1t5l8qh0wuypede88y8u6lwqpux8cw3l7jkqn4ynahhgzs76eus4sr5r4e8
   - &admin_daryapvlv age143wc5gdeagg0nennue3yqrppn73pt8wek60s74y6j69cqsmacacqf90k5e
   - &admin_jepa age1ppf9k3fcjmdgsq9n99hman3ppukhdznml7xrpyawggscdhr8lqms0vhlnw
+  - &admin_maxmaz age108cwl09e0qv2nl39w5kw0xqtqme3l5s8ttw8p8vhsekyslf0zfusskdmh6
 creation_rules:
   - path_regex: modules/by-name/secrets/common.yml
     key_groups:
@@ -22,6 +23,7 @@ creation_rules:
           - *admin_khromotov
           - *admin_daryapvlv
           - *admin_jepa
+          - *admin_maxmaz
           - *server_sequoia
   - path_regex: wireguard-clients.yml
     key_groups:
@@ -31,4 +33,5 @@ creation_rules:
           - *admin_khromotov
           - *admin_daryapvlv
           - *admin_jepa
+          - *admin_maxmaz
           - *server_sequoia
