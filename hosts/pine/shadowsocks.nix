@@ -12,7 +12,7 @@ in
   sops.secrets.proxyAuthConfig = {
     owner = "root";
     mode = "0400";
-    format = "json";
+    format = "yaml";
     restartUnits = [ "shadowsocks-local.service" ];
   };
   services.shadowsocks-nodes.gateway = {
