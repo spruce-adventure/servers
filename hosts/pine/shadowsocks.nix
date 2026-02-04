@@ -1,7 +1,7 @@
 { config, ... }:
 let
   inherit (config.constants) tunnelPort wgPort;
-  proxyInnerPort = 80;
+  proxyInnerPort = 8080;
 in
 {
   sops.secrets.shadowsocksPassword = {
