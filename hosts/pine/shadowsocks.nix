@@ -2,6 +2,7 @@
 let
   inherit (config.constants) tunnelPort wgPort;
   proxyInnerPort = 8080;
+  proxyDomain = "cdn-1.pang8578sprung.xyz";
 in
 {
   sops.secrets.shadowsocksPassword = {
@@ -51,17 +52,25 @@ in
   };
   services.nginx = {
     enable = true;
-    virtualHosts."cdn-1.pang8578sprung.xyz" = {
-      addSSL = true;
-      enableACME = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:${toString proxyInnerPort}";
-      };
-    };
+    streamConfig = ''
+      server {
+        listen 443 ssl;
+        proxy_pass 127.0.0.1:${toString proxyInnerPort};
+
+        ssl_certificate /var/lib/acme/${proxyDomain}/fullchain.pem;
+        ssl_certificate_key /var/lib/acme/${proxyDomain}/key.pem;
+
+        ssl_protocols TLSv1.2 TLSv1.3;
+      }
+    '';
   };
   security.acme = {
     acceptTerms = true;
     defaults.email = "il5y115me@mozmail.com";
+    certs.${proxyDomain} = {
+      webroot = "/var/lib/acme/acme-challenge";
+      group = "nginx";
+    };
   };
   networking.firewall.allowedUDPPorts = [ tunnelPort ];
   networking.firewall.allowedTCPPorts = [ 80 443 ];
