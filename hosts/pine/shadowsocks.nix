@@ -7,13 +7,13 @@ in
   sops.secrets.shadowsocksPassword = {
     owner = "root";
     mode = "0400";
-    restartUnits = [ "shadowsocks-local.service" ];
+    restartUnits = [ "shadowsocks-node-gateway.service" ];
   };
   sops.secrets.proxyAuthConfig = {
     owner = "root";
     mode = "0400";
     format = "yaml";
-    restartUnits = [ "shadowsocks-local.service" ];
+    restartUnits = [ "shadowsocks-node-gateway.service" ];
   };
   services.shadowsocks-nodes.gateway = {
     role = "local";
