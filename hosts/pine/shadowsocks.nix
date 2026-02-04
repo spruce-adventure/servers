@@ -52,7 +52,7 @@ in
   services.nginx = {
     enable = true;
     virtualHosts."cdn-1.pang8578sprung.xyz" = {
-      forceSSL = true;
+      addSSL = true;
       enableACME = true;
       locations."/" = {
         proxyPass = "http://127.0.0.1:${toString proxyInnerPort}";
