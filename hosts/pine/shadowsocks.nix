@@ -63,5 +63,6 @@ in
     acceptTerms = true;
     defaults.email = "il5y115me@mozmail.com";
   };
-  networking.firewall.allowedUDPPorts = [ tunnelPort 443 ];
+  networking.firewall.allowedUDPPorts = [ tunnelPort ];
+  networking.firewall.allowedTCPPorts = [ 443 ];
 }
