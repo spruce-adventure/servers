@@ -1,11 +1,18 @@
 { config, ... }:
 let
   inherit (config.constants) tunnelPort wgPort;
+  proxyInnerPort = 80;
 in
 {
   sops.secrets.shadowsocksPassword = {
     owner = "root";
     mode = "0400";
+    restartUnits = [ "shadowsocks-local.service" ];
+  };
+  sops.secrets.proxyAuthConfig = {
+    owner = "root";
+    mode = "0400";
+    format = "json";
     restartUnits = [ "shadowsocks-local.service" ];
   };
   services.shadowsocks-nodes.gateway = {
@@ -31,8 +38,30 @@ in
 
           mode = "udp_only";
         }
+        {
+          protocol = "http";
+
+          local_address = "127.0.0.1";
+          local_port = proxyInnerPort;
+
+          http_auth_config_path = config.sops.secrets.proxyAuthConfig.path;
+        }
       ];
     };
   };
-  networking.firewall.allowedUDPPorts = [ tunnelPort ];
+  services.nginx = {
+    enable = true;
+    virtualHosts."cdn-1.pang8578sprung.xyz" = {
+      forceSSL = true;
+      enableACME = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:${proxyInnerPort}";
+      };
+    };
+  };
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "il5y115me@mozmail.com";
+  };
+  networking.firewall.allowedUDPPorts = [ tunnelPort 443 ];
 }
