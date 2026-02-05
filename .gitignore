@@ -1,2 +1,14 @@
-/result
+# nix / direnv
 /.direnv
+/result
+
+# python
+.venv/
+__pycache__/
+*.pyc
+
+# env
+.env
+
+# logs
+tgbot/logs/*.log
