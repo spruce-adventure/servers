@@ -5,10 +5,9 @@ from typing import Final
 BASE_DIR = Path(__file__).resolve().parent
 
 # Telegram
-_raw_bot = os.getenv("BOT_TOKEN")
-if _raw_bot is None:
+BOT_TOKEN: Final[str] = os.getenv("BOT_TOKEN")
+if BOT_TOKEN is None:
     raise RuntimeError("BOT_TOKEN is not set")
-BOT_TOKEN: Final[str] = _raw_bot
 
 WHITELIST_PATH = BASE_DIR / "whitelist.json"
 
