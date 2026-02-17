@@ -53,7 +53,6 @@ daryapvlv-asus-laptop: ENC[AES256_GCM,data:TulPZU4UC/cQsthbZioAKPARirw+ywcdmW42N
 andy-mac: ENC[AES256_GCM,data:80z3lTGZ8wBwQ0od0kP29R/djK/HhYNv84IClU60FSDKxiuppJSIOsIhKHo=,iv:ft9bpdtqpDMR055tQkTDbsQRP+e+HsbrrcrJPI9p5Ug=,tag:2xXnDZPaNq4Xhzj757RHMQ==,type:str]
 lexa_luk: ENC[AES256_GCM,data:mrQOKpzg5LtyyvLbDRS+gynOIejipkiol+OpTYYsMPsaAv3fTmF4FWMLqgA=,iv:XKPF3Bgw4AYttAgdPoYcdSTG0qOzG8MOl6ZkKem6gzI=,tag:lCh6c/dVB7lsPy9953XYxg==,type:str]
 andy_pc2: ENC[AES256_GCM,data:XykBOUnl0r52oXJ2Ft5/logw9lCJd9Hb7Jo5XN4q8lE3UPYSoJwRMrY5vLg=,iv:8+3B7fI0rR6vU68CYj+MGycYY7WP1SltDS0tXaq6PLg=,tag:KL/aHQxgnlfbvOUhzHenWQ==,type:str]
-test_for_bot: ENC[AES256_GCM,data:YJhqfM5I/J0TIqHIztd9g1aaXNNIAXT7nGbT8LRe2HGgz/fnoae+5d0lPRo=,iv:dCGdaLdqv6vsIpDqm8XbuWtyW03Ja7su5Z4er6iEmz8=,tag:uxfV+pH9nuP7HM7oyDgZ9Q==,type:str]
 sops:
     age:
         - recipient: age1gkagt89wv3z4k3rxp5s0wqwaaml9mlvwfrzfzvh8fnjnwymarpzq5ccs67

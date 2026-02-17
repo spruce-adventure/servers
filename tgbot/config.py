@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from typing import Final
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR: Final[Path] = Path(os.getenv("TGBOT_BASE_DIR", Path.cwd())).resolve()
 
 # Telegram
 BOT_TOKEN: Final[str] = os.getenv("BOT_TOKEN")
@@ -12,10 +12,13 @@ if BOT_TOKEN is None:
 WHITELIST_PATH = BASE_DIR / "whitelist.json"
 
 # Repo (commit/push)
-_raw_repo = os.getenv("REPO_DIR")
-if _raw_repo is None:
-    raise RuntimeError("REPO_DIR is not set")
-REPO_DIR: Final[Path] = Path(_raw_repo)
+REPO_DIR: Final[Path] = Path(
+    os.getenv("REPO_DIR", BASE_DIR / "servers")
+).resolve()
+
+if not REPO_DIR.exists():
+    raise RuntimeError(f"REPO_DIR does not exist: {REPO_DIR}")
+
 
 GIT_REMOTE: Final[str] = os.getenv("GIT_REMOTE", "origin")
 GIT_BRANCH: Final[str] = os.getenv("GIT_BRANCH", "main")
