@@ -12,8 +12,7 @@ from tgbot.config import GITHUB_ENABLED
 from tgbot.states import CreateConfig
 from tgbot.utils import sanitize_filename
 from tgbot.services.repo import (
-    RepoLock,
-    client_exists,
+    repo_lock,
     run_new_client,
     git_has_changes,
     git_commit_and_push,
@@ -61,12 +60,7 @@ async def receive_name(message: Message, state: FSMContext) -> None:
     tmp_path: Path | None = None
 
     try:
-        with RepoLock():
-            if client_exists(name):
-                await message.answer(
-                    "⚠️ Клиент с таким именем уже существует. Введи другое имя:"
-                )
-                return
+        async with repo_lock:
 
             logger.info("start create client=%s tg=%s", name, user_id)
             conf_text = run_new_client(name)

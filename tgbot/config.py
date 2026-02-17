@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from typing import Final
 
-BASE_DIR: Final[Path] = Path(os.getenv("TGBOT_BASE_DIR", Path.cwd())).resolve()
+BASE_DIR: Final = Path(os.getenv("BASE_DIR", Path.cwd()))
 
 # Telegram
 BOT_TOKEN: Final[str] = os.getenv("BOT_TOKEN")
